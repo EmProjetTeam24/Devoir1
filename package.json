@@ -19,11 +19,5 @@
     "typescript": "^2.6.2",
     "webpack": "^3.10.0"
   },
-<<<<<<< HEAD
-  "dependencies": {
-    
-  }
-=======
   "dependencies": {}
->>>>>>> e05a055fd327eb970bacbb300c1838d9d3ef4bf1
 }

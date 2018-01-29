@@ -1,15 +1,4 @@
 {
-<<<<<<< HEAD
-    "compilerOptions": {
-        "target": "es5",
-        "lib": [
-            "es2015", "dom"
-        ],
-        "noImplicitAny": false,
-        "noImplicitThis": false
-    },
-    "types": "./src/typings.d.ts"
-=======
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -19,5 +8,4 @@
     "noImplicitAny": true,
     "noImplicitThis": true
   }
->>>>>>> e05a055fd327eb970bacbb300c1838d9d3ef4bf1
 }

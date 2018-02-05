@@ -1,80 +1,82 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
-  <title> Catalogue </title>
-  <meta charset="utf-8"/>
-  <link href="css/style.css" rel="stylesheet" type="text/css" >
-  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <title> Catalogue </title>
+    <meta charset="utf-8"/>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
-	<body>
-    <div class = "Menu">
+<body>
+<div class="Menu">
     <button type="button" id="Connect">Connect</button>
-        
-	  <button type="button" id="Panier">Panier</button>
+
+    <button type="button" id="Panier">Panier</button>
+</div>
+
+<div class="Produit">
+
+    <div class="NomProduit">
+        <p>HP EliteBook 1040 G4 Notebook PC</p>
     </div>
-    
-    <div class="Produit">
-    
-      <div class="NomProduit">
-      	<p>HP EliteBook 1040 G4 Notebook PC</p>
-      </div>
-      
-      <div class="ImageProduit">
-         <div id="carousel" class="carousel slide" data-ride="carousel">
+
+    <div class="ImageProduit">
+        <div id="carousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-              <li data-target="#carousel" data-slide-to="0" class="active"></li>
-              <li data-target="#carousel" data-slide-to="1"></li>
-              <li data-target="#carousel" data-slide-to="2"></li>
+                <li data-target="#carousel" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel" data-slide-to="1"></li>
+                <li data-target="#carousel" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="d-block w-100" src="media/41r+uG7ucwL.jpg" alt="First slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="media/41STqpexo8L.jpg" alt="Second slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" src="media/31x6SsDPqFL.jpg" alt="Third slide">
-              </div>
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="media/41r+uG7ucwL.jpg" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="media/41STqpexo8L.jpg" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="media/31x6SsDPqFL.jpg" alt="Third slide">
+                </div>
             </div>
             <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
             </a>
-          </div>
-
-      <div class="DescriptionProduit">
-      	<p>Intel® Core™ i5-7300U with Intel® HD Graphics 620 (2.6 GHz base frequency, up to 3.5 GHz with Intel® Turbo Boost Technology, 3 MB cache, 2 cores)
-            14" 8 GB DDR4-2400 SDRAM (1 x 8 GB) 3 year limited parts, labor (3-3-0) warranty. Certain restrictions and exclusions apply.
-        </p>
-      </div>
-      
-      <div class="PrixProduit">
-     	 <p>2079.00$ CA</p>
-      </div>
-      
-      <div class="BoutonPanier">
-      
-	  	<button type="button" id="AjouterPanier">Ajouter Panier</button>
-
-      </div>
+        </div>
     </div>
 
-    <script src="js/Bibliotheque/jquery-3.3.1.js"></script>
-    <script src="js/Bibliotheque/jquery-3.3.1.min.js"></script>
-    <script src="js/Bibliotheque/utils.js"></script>
-    <script src="js/Bibliotheque/tether.js"></script>
-    <script src="js/Bibliotheque/tether.min.js"></script>
-    <script src="js/Bibliotheque/bootstrap.js"></script>
-    <script src="js/Bibliotheque/bootstrap.min.js"></script>
-    
-    <script src="js/View/View.js"></script>
-    <script src="js/Controller/Controller.js"></script>
-    <script src="js/Modele/Modele.js"></script>
-    </body>
+    <div class="DescriptionProduit">
+        <p>Intel® Core™ i5-7300U with Intel® HD Graphics 620 (2.6 GHz base frequency, up to 3.5 GHz with Intel® Turbo
+            Boost Technology, 3 MB cache, 2 cores)
+            14" 8 GB DDR4-2400 SDRAM (1 x 8 GB) 3 year limited parts, labor (3-3-0) warranty. Certain restrictions and
+            exclusions apply.
+        </p>
+    </div>
+
+    <div class="PrixProduit">
+        <p>2079.00$ CA</p>
+    </div>
+
+    <div class="BoutonPanier">
+
+        <button type="button" id="AjouterPanier">Ajouter Panier</button>
+
+    </div>
+</div>
+<script src="js/Bibliotheque/jquery-3.3.1.js"></script>
+<script src="js/Bibliotheque/jquery-3.3.1.min.js"></script>
+<script src="js/Bibliotheque/utils.js"></script>
+<script src="js/Bibliotheque/tether.js"></script>
+<script src="js/Bibliotheque/tether.min.js"></script>
+<script src="js/Bibliotheque/bootstrap.js"></script>
+<script src="js/Bibliotheque/bootstrap.min.js"></script>
+
+<script src="js/View/View.js"></script>
+<script src="js/Controller/Controller.js"></script>
+<script src="js/Modele/Modele.js"></script>
+</body>
 </html>

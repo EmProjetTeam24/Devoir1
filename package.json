@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && webpack --config webpack.config.js --progress --profile --bail",
-    "start:dev": "webpack-dev-server --config webpack.config.js"
+    "build": "rimraf dist && webpack --config webpack.config.js --progress --profile --bail ",
+    "start:dev": "rimraf dist && webpack --config webpack.config.js --progress --profile --bail && webpack-dev-server --config webpack.config.js"
   },
   "keywords": [],
   "author": "",
@@ -14,8 +14,10 @@
     "@types/node": "^9.4.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "css-loader": "^0.28.9",
     "html-loader": "^0.5.5",
     "rimraf": "^2.6.2",
+    "style-loader": "^0.20.1",
     "ts-loader": "^3.3.1",
     "typescript": "^2.6.2",
     "webpack": "^3.10.0",

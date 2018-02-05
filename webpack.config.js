@@ -1,7 +1,7 @@
 "use strict";
 let path = require('path');
 module.exports = {
-    entry: "./src/script/index.ts",
+    entry: "./src/index.ts",
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: "bundle.js"

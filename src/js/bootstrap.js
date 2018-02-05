@@ -3314,7 +3314,7 @@ var Tooltip = function ($) {
         return DATA_KEY;
       }
     }, {
-      key: 'Event',
+      key: 'Evenement',
       get: function get() {
         return Event;
       }
@@ -3497,7 +3497,7 @@ var Popover = function ($) {
         return DATA_KEY;
       }
     }, {
-      key: 'Event',
+      key: 'Evenement',
       get: function get() {
         return Event;
       }

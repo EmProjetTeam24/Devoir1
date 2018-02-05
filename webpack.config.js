@@ -13,7 +13,7 @@ module.exports = {
         filename: "bundle.js"
     },
     resolve: {
-        extensions: [".js", ".ts", ".html"]
+        extensions: [".js", ".ts", ".html", ".css"]
     },
     module: {
         loaders: [
@@ -21,18 +21,18 @@ module.exports = {
                 test: /\.ts$/,
                 exclude: /node_modules/,
                 loader: "babel-loader!ts-loader"
-            },{
+            }, {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 loader: "babel-loader"
-            },{
+            }, {
                 test: /\.html$/,
                 exclude: /node_modules/,
                 loader: "html-loader?exportAsEs6Default"
-            },{
+            }, {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
-            }
+                loader: "style-loader!css-loader"
+            },
         ]
     }
 };

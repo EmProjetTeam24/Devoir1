@@ -1,10 +1,31 @@
-interface Achat {
+class Achat {
+    set Quantite(value: number) {
+        this._Quantite = value;
+    }
+
     Nom: string;
-    Quantite: number;
+    private _Quantite: number;
     Prix: number;
     Description: string;
     Poids: number;
     Photo?: string[]; //path of the image
+    render(): string {
+        return `<div class="product-item" id =${uniqueID()}>
+                    <img src="${this.Photo}" alt="" class="product_image" />
+                    <p class="product_info">${this.Description}</p>
+                    <button class="add_to_cart_button">ajouter au panier</button>
+                </div>`
+
+    }
+
+    constructor(nom: string, prix: number, description: string, poids: number = 0, photo?: string[]) {
+        this.Nom = nom;
+        this.Prix = prix;
+        this.Description = description;
+        this.Poids = poids;
+        if (photo) this.Photo = photo;
+    }
+
 }
 
 class ModelePanier {
@@ -21,48 +42,50 @@ class ModelePanier {
 
 }
 
-class inventaire {
+let uniqueID = function () {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = Math.random() * 16 | 0;
+        const v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+};
 
-    inventaire: Achat[] = [
-        {
-            Nom: "HP EliteBook 1040 G4 Notebook PC",
-            Quantite: 3,
-            Prix: 1200,
-            Description: "",
-            Poids: 0
 
-        }, {
-            Nom: "autre PC",
-            Quantite: 3,
-            Prix: 1201,
-            Description: "",
-            Poids: 0
-        }, {
-            Nom: "autre PC 2",
-            Quantite: 3,
-            Prix: 1202,
-            Description: "",
-            Poids: 0
-        }, {
-            Nom: "autre PC 3",
-            Quantite: 3,
-            Prix: 1203,
-            Description: "",
-            Poids: 0
-        }, {
-            Nom: "autre PC 4",
-            Quantite: 3,
-            Prix: 1204,
-            Description: "",
-            Poids: 0
-        }, {
-            Nom: "autre PC 5",
-            Quantite: 3,
-            Prix: 1205,
-            Description: "",
-            Poids: 0
+export default class inventaire {
+
+    private _achats: Achat[];
+
+    constructor() {
+        this._achats = [
+            new Achat("PC 01", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 02", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 03", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 04", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 05", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 06", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 07", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 08", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 09", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 10", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 11", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+            new Achat("PC 12", 300, "un trés beau PC", 1280, ["assets/media/HP.jpg"]),
+        ];
+    };
+
+    addAchat(achat: Achat): boolean {
+        this._achats.push(achat);
+        return true;
+    }
+
+
+    renderAll(): string {
+        let res: string = "";
+        for (let achat of this._achats) {
+            res.concat(achat.render())
         }
-    ];
+        return res;
+    }
+
 }
 
 

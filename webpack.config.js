@@ -1,20 +1,24 @@
 "use strict";
 let path = require('path');
+
 module.exports = {
-    devtool: 'inline-source-map',
-    entry: "./src/index.ts",
-
-    devServer: {
-        //contentBase: './src'
-    },
-
-    output: {
-        path: path.resolve(__dirname, './dist'),
-        filename: "bundle.js"
-    },
     resolve: {
-        extensions: [".js", ".ts", ".html", ".css"]
+        extensions: [".js", ".ts", ".html", ".css"],
     },
+    devtool:
+        'inline-source-map',
+    entry:
+        "./src/index.ts",
+
+
+    output:
+        {
+            path: path.resolve(__dirname, './dist'),
+            filename:
+                "bundle.js"
+        }
+    ,
+
     module: {
         loaders: [
             {
@@ -35,4 +39,5 @@ module.exports = {
             },
         ]
     }
-};
+}
+;

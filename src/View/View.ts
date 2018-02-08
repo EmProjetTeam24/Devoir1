@@ -1,11 +1,9 @@
-import {default as Controller} from "../Controller/Controller";
-import inventaire from "../Modele/Modele";
-
 export default class View {
-    produits: inventaire;
-    controller: Controller;
+    //TODO importer les types
+    produits:any;
+    controller:any;
 
-    constructor(controller: Controller) {
+    constructor(controller: any) {
         this.controller = controller;
         this.produits = this.controller.model;
         this.refresh();

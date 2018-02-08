@@ -1,13 +1,13 @@
-import {default as Controller} from "../Controller/Controller";
-import inventaire from "../Modele/Modele";
+import Inventaire from "../Modele/Modele";
+import Controller from "../Controller/Controller";
 
 export default class View {
-    produits: inventaire;
+    produits: Inventaire;
     controller: Controller;
 
-    constructor(controller: Controller) {
+    constructor(controller: any) {
         this.controller = controller;
-        this.produits = this.controller.model;
+        this.produits = this.controller.inventaire;
         this.refresh();
     }
 

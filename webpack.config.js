@@ -1,24 +1,17 @@
 "use strict";
-let path = require('path');
+const path = require('path');
+const CircularDependencyPlugin = require('circular-dependency-plugin');
+
 
 module.exports = {
-    resolve: {
-        extensions: [".js", ".ts", ".html", ".css"],
+    resolve: {extensions: [".js", ".ts", ".html", ".css"]},
+    devtool: 'inline-source-map',
+    entry: "./src/index.ts",
+    output: {
+        path: path.resolve(__dirname, './dist'),
+        filename: "bundle.js",
+        libraryTarget: "umd",
     },
-    devtool:
-        'inline-source-map',
-    entry:
-        "./src/index.ts",
-
-
-    output:
-        {
-            path: path.resolve(__dirname, './dist'),
-            filename:
-                "bundle.js"
-        }
-    ,
-
     module: {
         loaders: [
             {
@@ -38,6 +31,15 @@ module.exports = {
                 loader: "style-loader!css-loader"
             },
         ]
-    }
-}
-;
+    },
+    plugins: [
+        new CircularDependencyPlugin({
+            // exclude detection of files based on a RegExp
+            exclude: /a\.js|node_modules/,
+            // add errors to webpack instead of warnings
+            failOnError: true,
+            // set the current working directory for displaying module paths
+            cwd: process.cwd(),
+        })
+    ]
+};

@@ -1014,19 +1014,8 @@ section {
     width: calc(100% + 1px);
     height: 100%;
     pointer-events: none;
-    content: '';
     border: solid 2px rgba(235, 235, 235, 0);
     border-radius: 3px;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-}
-
-.product-item:hover::after {
-    box-shadow: 0 25px 29px rgba(63, 78, 100, 0.15);
-    border: solid 2px rgba(235, 235, 235, 1);
 }
 
 .product {

@@ -28,8 +28,9 @@ export default class Inventaire {
     renderAll(): string {
         let res: string = "";
         for (let achat of this._achats) {
-            res.concat(achat.render())
+            res += achat.render();
         }
+        console.debug("res=" + res);
         return res;
     }
 
@@ -55,12 +56,21 @@ export class Achat {
     };
 
     render(): string {
-        console.log(`rendering ${this.Description}`);
-        return `<div class="product-item" id =${this.uniqueID()}>
-                    <img src="${this.Photo}" alt="" class="product_image" />
-                    <p class="product_info">${this.Description}</p>
-                    <button class="add_to_cart_button">ajouter au panier</button>
-                </div>`
+        let ret: string = `<div class="product-item">
+										<div class="product product_filter">
+											<div class="product_image">
+												<img src="${this.Photo}" alt="">
+											</div>
+											<div class="favorite"></div>
+											<div class="product_info">
+												<h6 class="product_name">${this.Nom}</h6>
+												<div class="product_price">$ ${this.Prix}</div>
+											</div>
+										</div>
+										<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+									</div>`;
+        console.debug(ret);
+        return ret;
 
     }
 

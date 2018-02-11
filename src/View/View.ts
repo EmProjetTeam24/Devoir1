@@ -13,8 +13,10 @@ export default class View {
 
     refresh() {
         console.log("adding products");
-
-        document.getElementById("produits").innerHTML = this.produits.renderAll();
+        let divProduits: Element = document.getElementsByClassName('product-grid')[0];
+        let produits: string = this.produits.renderAll();
+        console.debug(produits);
+        divProduits.innerHTML=produits;
     }
 
 }

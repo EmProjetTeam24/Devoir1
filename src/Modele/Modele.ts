@@ -1,4 +1,5 @@
 import View from "../View/View";
+import {isNullOrUndefined} from "util";
 
 export default class Inventaire {
 
@@ -6,18 +7,18 @@ export default class Inventaire {
 
     constructor() {
         this._achats = [
-            new Achat("PC 01", 310,  "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 02", 320,  "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 03", 330,  "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 04", 340,  "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 05", 350,  "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 06", 360,  "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 07", 370,  "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 08", 2000, "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 09", 0,    "un trés beau PC pas cher", ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 10", 1230, "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 11", 303,  "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
-            new Achat("PC 12", 301,  "un trés beau PC",          ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 01", 310, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 02", 320, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 03", 330, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 04", 340, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 05", 350, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 06", 360, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 07", 370, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 08", 2000, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 09", 0, "un trés beau PC pas cher", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 10", 1230, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 11", 303, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
+            new Achat("PC 12", 301, "un trés beau PC", ["./assets/media/HP.jpg"], 1280),
         ];
     }
 
@@ -34,6 +35,12 @@ export default class Inventaire {
         return achat == this._achats.splice(index, 1)[0];
     }
 
+    getAchat(_id: string): Achat {
+        let _retour = this._achats.find((x) => x.Id == _id);
+        if (!isNullOrUndefined(_retour))
+            return this._achats.find((x) => x.Id == _id);
+    }
+
 
     renderAll(): string {
         let res: string = "";
@@ -48,6 +55,8 @@ export default class Inventaire {
 }
 
 export class Achat {
+    descriptionDetaillee: string;
+
     set Quantite(value: number) {
         this._Quantite = value;
     }
@@ -75,7 +84,11 @@ export class Achat {
 
     }
 
-    constructor(nom: string, prix: number, description: string, photo?: string[], poids: number = 0, quantite: number = 0) {
+    constructor(nom: string, prix: number, description: string, photo?: string[], poids: number = 0, quantite: number = 0, descritionDetailllee = "Vitae et impedit voluptatem et porro dolorem aspernatur rerum. Maiores sit odit rerum. Voluptatem nobis aspernatur error. Aut voluptatem distinctio omnis. Aspernatur tempore sunt ducimus expedita ea aspernatur temporibus earum.\n" +
+    "Vitae ipsa repellat omnis natus deleniti molestias. Sunt quidem nulla vitae. Sit laudantium odio delectus et excepturi. Illo corrupti officia et. Optio assumenda quam pariatur maxime id animi dolores culpa. Facere occaecati et alias reprehenderit atque aut est.\n" +
+    "Ipsa minus est corporis numquam non quis hic. Nihil quidem autem sed est odio consequatur. Nesciunt non ipsa id unde. Eligendi provident ad consectetur et.\n" +
+    "Doloremque ut laboriosam id. Ducimus eveniet aut nihil sed odio adipisci esse rem. Cupiditate aperiam qui temporibus deserunt. Dolore tempore ut tenetur quo fugit.\n" +
+    "Dolorum quos dolorem repellendus minima qui consequatur magnam. Quis eos delectus alias. Aut commodi magnam ut veniam aut laboriosam. Voluptas quaerat ea nihil voluptatem consequatur. Assumenda consequatur quasi tenetur.") {
         this.Id = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
             const r = Math.random() * 16 | 0;
             const v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -85,7 +98,7 @@ export class Achat {
         this.Prix = prix;
         this.Description = description;
         this.Poids = poids;
-
+        this.descriptionDetaillee = descritionDetailllee;
         if (photo) this.Photo = photo;
     }
 

@@ -20,6 +20,12 @@ export default class Controller {
             lienPanier[i].addEventListener('click', () => this.makePanier(this.panier));
         }
 
+        let liensDescription: HTMLCollectionOf<Element> = document.getElementsByClassName("product-item");
+        for (let i = 0; i < liensDescription.length; ++i) {
+            liensDescription[i].addEventListener('click', (e) => this.infoDetaille(<Element>e.target));
+        }
+
+
     }
 
     makePanier(_panier: ModelePanier) {
@@ -92,5 +98,12 @@ export default class Controller {
 
     private removeFromCart(_Id: string) {
         this.panier.remove(_Id);
+    }
+
+    private infoDetaille(e: Element) {
+        let product_infos = e.parentElement.getElementsByClassName("product_info");
+        console.debug(product_infos);
+        let _id: string = product_infos[0].id;
+        View.infoDetaille(this.inventaire.getAchat(_id));
     }
 }

@@ -1,4 +1,4 @@
-import Inventaire, {ModelePanier} from "../Modele/Modele";
+import Inventaire, {Achat, ModelePanier} from "../Modele/Modele";
 import Controller from "../Controller/Controller";
 
 export default class View {
@@ -524,6 +524,16 @@ export default class View {
 </div>`;
         document.title = "Panier";
         // window.history.pushState({}, "Panier", document.location.hostname + "/panier");
+    }
+
+    static infoDetaille(achat:Achat){
+        document.body.innerHTML=`
+                    <div class="detailView">
+                        ${achat.render()}
+                        <div> ${achat.descriptionDetaillee}</div>
+                        <div class="red_button add_to_cart_button">add to cart</div>
+                    </div>
+                    <button class="back" onclick="View.makeIndex()">Retour</button> `
     }
 
 }

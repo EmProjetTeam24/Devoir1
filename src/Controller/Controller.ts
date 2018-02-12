@@ -3,6 +3,8 @@ import {isNullOrUndefined} from "util";
 import View from "../View/View";
 
 let $ = require("jquery");
+
+
 export default class Controller {
 
     inventaire: Inventaire;
@@ -24,6 +26,8 @@ export default class Controller {
         for (let i = 0; i < liensDescription.length; ++i) {
             liensDescription[i].addEventListener('click', (e) => this.infoDetaille(<Element>e.target));
         }
+
+        document.getElementById("admin").addEventListener("click", this.chargerAdmin);
 
 
     }
@@ -105,5 +109,29 @@ export default class Controller {
         console.debug(product_infos);
         let _id: string = product_infos[0].id;
         View.infoDetaille(this.inventaire.getAchat(_id));
+    }
+
+    private chargerAdmin() {
+        View.chargerConnexion();
+        document.getElementById("login").addEventListener("click", () => {
+            if ((<HTMLInputElement>document.getElementById("username")).value == "admin" &&
+                (<HTMLInputElement>document.getElementById("password")).value == "123") {
+                View.chargerAdmin();
+                document.getElementById("nouveau-produit").addEventListener("click", this.nouveauProduit);
+            } else {
+                alert("erreur authentification: login=admin et password=123");
+            }
+        });
+    }
+
+    private nouveauProduit(): boolean {
+        let nom: string = (<HTMLInputElement>document.getElementById("product-name")).value;
+        let prix: number = Number((<HTMLInputElement>document.getElementById("product-prix")).value);
+        let description: string = (<HTMLInputElement>document.getElementById("description")).value;
+        let poids: number = Number((<HTMLInputElement>document.getElementById("product-weigth")).value);
+
+        let _achat: Achat = new Achat(nom, prix, description, [""], poids);
+
+        return this.inventaire.addAchat(_achat);
     }
 }

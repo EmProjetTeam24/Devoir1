@@ -58,11 +58,7 @@ export default class View {
                         <nav class="navbar">
                             <ul class="navbar_menu">
                                 <li><a href="index.html">home</a></li>
-                                <li><a href="#">shop</a></li>
-                                <li><a href="#">promotion</a></li>
-                                <li><a href="#">pages</a></li>
-                                <li><a href="#">blog</a></li>
-                                <li><a href="#">contact</a></li>
+                                <li><a href="#" id="admin">Admin</a></li>
                             </ul>
                             <ul class="navbar_user">
                                 <li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
@@ -526,8 +522,8 @@ export default class View {
         // window.history.pushState({}, "Panier", document.location.hostname + "/panier");
     }
 
-    static infoDetaille(achat:Achat){
-        document.body.innerHTML=`
+    static infoDetaille(achat: Achat) {
+        document.body.innerHTML = `
                     <div class="detailView">
                         ${achat.render()}
                         <div> ${achat.descriptionDetaillee}</div>
@@ -536,4 +532,12 @@ export default class View {
                     <button class="back" onclick="View.makeIndex()">Retour</button> `
     }
 
+
+    static chargerConnexion() {
+        document.body.innerHTML = `<form id="app-login"><fieldset><legend>Login Details</legend><div><label for="user-name">Username:</label><input id="username" name="user-name" type="text" placeholder="Your username is admin" required autofocus></div><div><label for="password">Password:</label><input id="password" name="password" type="password" placeholder="password is 123" required></div><div><input id="login" name="login" type="submit" value="Login"></div></fieldset></form>`;
+    }
+
+    static chargerAdmin() {
+        document.body.innerHTML = `<form id="add-produit"><fieldset><legend>Nouveau Produit</legend><div><label for="name">Nom:</label><input id="product-name" name="name" type="text" placeholder="PC 1" required autofocus></div><div><label for="prix">Prix:</label><input id="product-prix" name="prix" type="text" placeholder="$300" required></div><div><label for="description">Description</label><input id="description" name="description" type="text" placeholder="" required></div><div><label for="poids">Poids:</label><input id="product-weigth" name="poids" type="number" placeholder="1250" required></div><div><button id="nouveau-produit">Enregistrer</button></div></fieldset></form>`;
+    }
 }

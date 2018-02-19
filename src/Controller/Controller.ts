@@ -12,6 +12,7 @@ export default class Controller {
 
     constructor(model: Inventaire) {
         this.inventaire = model;
+        console.log("new Controller");
         this.panier = new ModelePanier();
         console.log("controller started");
         View.makeIndex();
@@ -19,10 +20,10 @@ export default class Controller {
 
         let lienPanier = document.getElementsByClassName("panier");
         for (let i = 0; i < lienPanier.length; ++i) {
-            lienPanier[i].addEventListener('click', () => this.makePanier(this.panier));
+            lienPanier[i].addEventListener('click', () => this.makePanier());
         }
 
-        let liensDescription: HTMLCollectionOf<Element> = document.getElementsByClassName("product-item");
+        let liensDescription: HTMLCollectionOf<Element> = document.getElementsByClassName("product_filter");
         for (let i = 0; i < liensDescription.length; ++i) {
             liensDescription[i].addEventListener('click', (e) => this.infoDetaille(<Element>e.target));
         }
@@ -32,9 +33,9 @@ export default class Controller {
 
     }
 
-    makePanier(_panier: ModelePanier) {
+    makePanier() {
         console.log("panier en cours");
-        View.makePanier(_panier);
+        View.makePanier();
         console.log("adding events");
         let boutons = document.getElementsByClassName("remove_from_cart_button");
         console.log(boutons);
@@ -44,7 +45,6 @@ export default class Controller {
             boutons[i].addEventListener("click", (event) => {
                 console.log("remove from cart clicked");
                 let _id: string = (<Element>event.target).parentElement.getElementsByTagName("input")[0].value;
-                console.log("removing" + _id);
                 this.removeFromCart(_id);
             });
 
@@ -55,8 +55,8 @@ export default class Controller {
 
 
     Onchange() {
-        View.refreshProduits(this.inventaire);
-        View.refreshPanier(this.panier);
+        View.refreshProduits();
+        View.refreshPanier();
         let boutons = document.getElementsByClassName("add_to_cart_button");
         let source: HTMLElement;
         for (let i = 0; i < boutons.length; ++i) {
@@ -64,14 +64,14 @@ export default class Controller {
             //console.log("bouton" + i);
             boutons[i].addEventListener("click", (event) => {
                 let bouton: Element = <Element>event.target;
-                this.addToCart(bouton.parentElement);
+                Controller.addToCart(bouton.parentElement);
             });
 
         }
     }
 
 
-    addToCart(source: Element) {
+    static addToCart(source: Element) {
 
         if (isNullOrUndefined(source)) {
             console.error("error source is null");
@@ -96,12 +96,15 @@ export default class Controller {
         }
 
         let ajout: Achat = new Achat(nom, prix, description, photo, poids);
-        this.panier.add(ajout);
+        ModelePanier.add(ajout);
+        View.refreshPanier();
     }
 
 
     private removeFromCart(_Id: string) {
         this.panier.remove(_Id);
+        View.makePanier();
+        View.refreshPanier();
     }
 
     private infoDetaille(e: Element) {
@@ -117,14 +120,14 @@ export default class Controller {
             if ((<HTMLInputElement>document.getElementById("username")).value == "admin" &&
                 (<HTMLInputElement>document.getElementById("password")).value == "123") {
                 View.chargerAdmin();
-                document.getElementById("nouveau-produit").addEventListener("click", this.nouveauProduit);
+                document.getElementById("nouveau-produit").addEventListener("click", Controller.nouveauProduit);
             } else {
                 alert("erreur authentification: login=admin et password=123");
             }
         });
     }
 
-    private nouveauProduit(): boolean {
+    private static nouveauProduit(): boolean {
         let nom: string = (<HTMLInputElement>document.getElementById("product-name")).value;
         let prix: number = Number((<HTMLInputElement>document.getElementById("product-prix")).value);
         let description: string = (<HTMLInputElement>document.getElementById("description")).value;
@@ -132,6 +135,10 @@ export default class Controller {
 
         let _achat: Achat = new Achat(nom, prix, description, [""], poids);
 
-        return this.inventaire.addAchat(_achat);
+        let ret = Inventaire.add(_achat);
+        View.makeIndex();
+        View.refreshProduits();
+        return ret;
     }
+
 }

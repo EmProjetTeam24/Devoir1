@@ -1,17 +1,18 @@
 import Inventaire, {Achat, ModelePanier} from "../Modele/Modele";
-import Controller from "../Controller/Controller";
+
 
 export default class View {
 
 
-    static refreshProduits(newProduits: Inventaire) {
-        document.getElementById("gridProduits").innerHTML = newProduits.renderAll();
+    static refreshProduits() {
+        document.getElementById("gridProduits").innerHTML = Inventaire.renderAll();
 
     }
 
-    static refreshPanier(newPanier: ModelePanier) {
-        document.getElementById("checkout_items").innerHTML = newPanier.Quantite.toString();
-        document.getElementById("checkout_price").innerHTML = "$" + newPanier.PrixTotal().toLocaleString();
+    static refreshPanier() {
+        let newPanier:Achat[] = JSON.parse(localStorage.getItem("panier"));
+        document.getElementById("checkout_items").innerHTML = newPanier.length.toString();
+        document.getElementById("checkout_price").innerHTML = "$" + localStorage.getItem("prixPanier");
     }
 
     static makeIndex() {
@@ -57,7 +58,7 @@ export default class View {
                         </div>
                         <nav class="navbar">
                             <ul class="navbar_menu">
-                                <li><a href="index.html">home</a></li>
+                                <li><a href="#" onclick="View.makeIndex()">home</a></li>
                                 <li><a href="#" id="admin">Admin</a></li>
                             </ul>
                             <ul class="navbar_user">
@@ -180,51 +181,6 @@ export default class View {
             </div>
         </div>
     </div>
-
-    <!-- Benefit -->
-
-    <div class="benefit">
-        <div class="container">
-            <div class="row benefit_row">
-                <div class="col-lg-3 benefit_col">
-                    <div class="benefit_item d-flex flex-row align-items-center">
-                        <div class="benefit_icon"><i class="fa fa-truck" aria-hidden="true"></i></div>
-                        <div class="benefit_content">
-                            <h6>free shipping</h6>
-                            <p>Suffered Alteration in Some Form</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 benefit_col">
-                    <div class="benefit_item d-flex flex-row align-items-center">
-                        <div class="benefit_icon"><i class="fa fa-money" aria-hidden="true"></i></div>
-                        <div class="benefit_content">
-                            <h6>cach on delivery</h6>
-                            <p>The Internet Tend To Repeat</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 benefit_col">
-                    <div class="benefit_item d-flex flex-row align-items-center">
-                        <div class="benefit_icon"><i class="fa fa-undo" aria-hidden="true"></i></div>
-                        <div class="benefit_content">
-                            <h6>45 days return</h6>
-                            <p>Making it Look Like Readable</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 benefit_col">
-                    <div class="benefit_item d-flex flex-row align-items-center">
-                        <div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
-                        <div class="benefit_content">
-                            <h6>opening all week</h6>
-                            <p>8AM - 09PM</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Footer -->
 
     <footer class="footer">
@@ -263,10 +219,11 @@ export default class View {
 
 </div>`;
         document.title = "Home";
+
         // window.history.pushState({}, "Home", document.location.hostname + "/index");
     }
 
-    static makePanier(panier: ModelePanier) {
+    static makePanier() {
         document.body.innerHTML = `<div class="super_container">
 
     <!-- Header -->
@@ -427,7 +384,7 @@ export default class View {
                                 <!-- Product Grid -->
 
                                 <div class="product-grid" id="panier">
-                                    ${panier.renderAll()}
+                                    ${ModelePanier.renderAll()}
                                 </div>
                             </div>
                         </div>
@@ -519,13 +476,14 @@ export default class View {
 
 </div>`;
         document.title = "Panier";
+        View.refreshPanier()
         // window.history.pushState({}, "Panier", document.location.hostname + "/panier");
     }
 
-    static infoDetaille(achat: Achat) {
+    static infoDetaille(achat:Achat) {
         document.body.innerHTML = `
                     <div class="detailView">
-                        ${achat.render()}
+                        ${Achat.render(achat)}
                         <div> ${achat.descriptionDetaillee}</div>
                         <div class="red_button add_to_cart_button">add to cart</div>
                     </div>
@@ -534,10 +492,10 @@ export default class View {
 
 
     static chargerConnexion() {
-        document.body.innerHTML = `<form id="app-login"><fieldset><legend>Login Details</legend><div><label for="user-name">Username:</label><input id="username" name="user-name" type="text" placeholder="Your username is admin" required autofocus></div><div><label for="password">Password:</label><input id="password" name="password" type="password" placeholder="password is 123" required></div><div><input id="login" name="login" type="submit" value="Login"></div></fieldset></form>`;
+        document.body.innerHTML = `<form id="app-login" action="javascript:void(0);"><fieldset><legend>Login Details</legend><div><label for="user-name">Username:</label><input id="username" name="user-name" type="text" placeholder="Your username is admin" required autofocus></div><div><label for="password">Password:</label><input id="password" name="password" type="password" placeholder="password is 123" required></div><div><input id="login" name="login" type="submit" value="Login"></div></fieldset></form>`;
     }
 
     static chargerAdmin() {
-        document.body.innerHTML = `<form id="add-produit"><fieldset><legend>Nouveau Produit</legend><div><label for="name">Nom:</label><input id="product-name" name="name" type="text" placeholder="PC 1" required autofocus></div><div><label for="prix">Prix:</label><input id="product-prix" name="prix" type="text" placeholder="$300" required></div><div><label for="description">Description</label><input id="description" name="description" type="text" placeholder="" required></div><div><label for="poids">Poids:</label><input id="product-weigth" name="poids" type="number" placeholder="1250" required></div><div><button id="nouveau-produit">Enregistrer</button></div></fieldset></form>`;
+        document.body.innerHTML = `<form id="add-produit" action="javascript:void(0);"><fieldset><legend>Nouveau Produit</legend><div><label for="name">Nom:</label><input id="product-name" name="name" type="text" placeholder="PC 1" required autofocus></div><div><label for="prix">Prix:</label><input id="product-prix" name="prix" type="number" placeholder="$300" required></div><div><label for="description">Description</label><input id="description" name="description" type="text" placeholder="" required></div><div><label for="poids">Poids:</label><input id="product-weigth" name="poids" type="number" placeholder="1250" required></div><div><button id="nouveau-produit">Enregistrer</button></div></fieldset></form>`;
     }
 }

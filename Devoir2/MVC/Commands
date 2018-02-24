@@ -1,0 +1,4 @@
+ng new MVC
+ng g c main // new components
+ng serve //start server webpack
+ctrl + c //stop server webpack

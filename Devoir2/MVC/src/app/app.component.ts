@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {DataComponent} from './Modele/data.component';
 
 @Component({
   selector: 'app-root',
